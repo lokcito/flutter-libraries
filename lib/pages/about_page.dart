@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,14 +8,27 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
+  String info = "Esta es una aplicación de ejemplo.";
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(children: [Text("Acerca de la empresa: "),
-      ElevatedButton(onPressed: () {
-        context.go("/");
-      }, child: Text("Regresar a inicio"))
-      ]),
+      child: Column(
+        children: [
+          Text(info),
+          ElevatedButton(
+            onPressed: () {
+              context.go("/");
+            },
+            child: Text("Regresar a inicio"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.go("/game");
+            },
+            child: Text("Ir a juego"),
+          ),
+        ],
+      ),
     );
   }
 }

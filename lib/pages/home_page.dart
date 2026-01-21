@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: Text(digimons[indice].name),
                         subtitle: Text("yyyy"),
                         onTap: () {
-                          print("Seleccionado: " + digimons[indice].name);
+                          print("Seleccionado: ${digimons[indice].name}");
                         },
                       );
                     });
