@@ -31,26 +31,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Demo Click Counter'),
-      ),
+      appBar: AppBar(title: const Text('Flutter Demo Click Counter')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: const TextStyle(fontSize: 25),
+            const Text('You have pushed the button this many times:'),
+            Text('$_counter', style: const TextStyle(fontSize: 25)),
+            ElevatedButton(
+              onPressed: () => {context.go("/formulario")},
+              child: Text("Ir al formulario"),
             ),
             Expanded(
-                child: FutureBuilder<List<DigiModel>>(
-              future: _digiList,
-              builder: (context, snapshot) {
-                final digimons = snapshot.data!;
-                return ListView.builder(
+              child: FutureBuilder<List<DigiModel>>(
+                future: _digiList,
+                builder: (context, snapshot) {
+                  final digimons = snapshot.data!;
+                  return ListView.builder(
                     itemCount: digimons.length,
                     itemBuilder: (_, indice) {
                       return ListTile(
@@ -61,9 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           print("Seleccionado: ${digimons[indice].name}");
                         },
                       );
-                    });
-              },
-            ))
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

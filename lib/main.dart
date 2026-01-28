@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pantallas/pages/about_page.dart';
 import 'package:pantallas/pages/game_page.dart';
 import 'package:pantallas/pages/home_page.dart';
-
+import 'package:pantallas/pages/formulario_page.dart';
+  
 void main() => runApp(const MyApp());
 
 final GoRouter _router = GoRouter(
@@ -29,6 +30,11 @@ final GoRouter _router = GoRouter(
             return GamePage();
           },
         ),
+        GoRoute(path: 'formulario', 
+          builder: (BuildContext context, GoRouterState state) {
+            return const FormularioPage();
+          },
+        )
       ],
     ),
   ],
