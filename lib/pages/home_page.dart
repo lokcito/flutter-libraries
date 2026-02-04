@@ -13,12 +13,28 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final DigiService _digiService = DigiService();
   late Future<List<DigiModel>> _digiList;
+  List<DigiModel> digimonsCargados = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _digiList = _digiService.getDigimons();
+    _digiList = _cargaInicial();
+  }
+
+  Future<List<DigiModel>> _cargaInicial() async {
+    final lista = await _digiService.getDigimons();
+    digimonsCargados = lista;
+    return lista;
+  }
+
+  _cargarMasDigimons() async {
+    print("Cargando más digimons...");
+    final lista = await _digiService.getDigimons();
+    setState(() {
+       digimonsCargados.addAll(lista);
+    });
+   
   }
 
   void _incrementCounter(BuildContext context) {
@@ -50,14 +66,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                   final digimons = snapshot.data!;
                   return ListView.builder(
-                    itemCount: digimons.length,
+                    itemCount: digimonsCargados.length + 1,
                     itemBuilder: (_, indice) {
+                      if (indice == digimonsCargados.length) {
+                        return const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      if (indice == digimonsCargados.length - 1) {
+                        _cargarMasDigimons();
+                      }
                       return ListTile(
-                        leading: Image.network(digimons[indice].image),
-                        title: Text(digimons[indice].name),
+                        leading: Image.network(digimonsCargados[indice].image),
+                        title: Text(digimonsCargados[indice].name),
                         subtitle: Text("yyyy"),
                         onTap: () {
-                          print("Seleccionado: ${digimons[indice].name}");
+                          print(
+                            "Seleccionado: ${digimonsCargados[indice].name}",
+                          );
                         },
                       );
                     },
