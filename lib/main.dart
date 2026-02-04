@@ -2,39 +2,48 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pantallas/layouts/main_layout.dart';
 import 'package:pantallas/pages/about_page.dart';
 import 'package:pantallas/pages/game_page.dart';
 import 'package:pantallas/pages/home_page.dart';
 import 'package:pantallas/pages/formulario_page.dart';
-  
+
 void main() => runApp(const MyApp());
 
 final GoRouter _router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const MyHomePage();
+  routes: [
+    ShellRoute(
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return MainLayout(child: child);
       },
-      routes: <RouteBase>[
+      routes: [
         GoRoute(
-          path: 'about',
+          path: '/',
           builder: (BuildContext context, GoRouterState state) {
-            return const AboutPage();
+            return const MyHomePage();
           },
-        ),
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'about',
+              builder: (BuildContext context, GoRouterState state) {
+                return const AboutPage();
+              },
+            ),
 
-        GoRoute(
-          path: 'game',
-          builder: (BuildContext context, GoRouterState state) {
-            return GamePage();
-          },
+            GoRoute(
+              path: 'game',
+              builder: (BuildContext context, GoRouterState state) {
+                return GamePage();
+              },
+            ),
+            GoRoute(
+              path: 'formulario',
+              builder: (BuildContext context, GoRouterState state) {
+                return const FormularioPage();
+              },
+            ),
+          ],
         ),
-        GoRoute(path: 'formulario', 
-          builder: (BuildContext context, GoRouterState state) {
-            return const FormularioPage();
-          },
-        )
       ],
     ),
   ],

@@ -31,7 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Demo Click Counter')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
