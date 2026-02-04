@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FutureBuilder<List<DigiModel>>(
                 future: _digiList,
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
                   final digimons = snapshot.data!;
                   return ListView.builder(
                     itemCount: digimons.length,

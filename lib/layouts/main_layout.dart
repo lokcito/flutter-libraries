@@ -13,7 +13,23 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('ScreenApp')),
+      appBar: AppBar(
+        title: const Text('ScreenApp'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            onPressed: () {
+              context.go('/game');
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.info),
+            onPressed: () {
+              context.go('/about');
+            },
+          ),
+        ],
+      ),
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: const [
